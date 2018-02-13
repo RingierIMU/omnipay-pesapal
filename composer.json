@@ -1,0 +1,39 @@
+{
+  "name": "oneafricamedia/omnipay-pesapal",
+  "type": "library",
+  "description": "PesaPal gateway for Omnipay payment processing library",
+  "keywords": [
+    "gateway",
+    "merchant",
+    "omnipay",
+    "pay",
+    "payment",
+    "pesapal",
+    "purchase"
+  ],
+  "homepage": "https://github.com/OneAfricaMedia/omnipay-pespal",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ROAM",
+      "email": "oamdev@roam.africa"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Omnipay\\Pesapal\\" : "src/"
+    }
+  },
+  "require": {
+    "omnipay/common": "~2.0"
+  },
+  "require-dev": {
+    "omnipay/tests": "~2.0"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.3.x-dev"
+    }
+  },
+  "minimum-stability": "dev"
+}
