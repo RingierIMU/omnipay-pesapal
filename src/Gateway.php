@@ -3,13 +3,13 @@
 namespace Omnipay\Pesapal;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Pesapal\OAuth\OAuthConsumer;
 use Omnipay\Pesapal\OAuth\OAuthException;
 use Omnipay\Pesapal\OAuth\OAuthRequest;
 use Omnipay\Pesapal\OAuth\OAuthSignatureMethod_Hmac_Sha1;
 use SimpleXMLElement;
-use GuzzleHttp\Psr7\Request;
 
 /**
  * @method authorize(array $options = array())
@@ -102,12 +102,12 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @param string $email
-     * @param string $reference
-     * @param string $description
-     * @param float $amount
+     * @param string      $email
+     * @param string      $reference
+     * @param string      $description
+     * @param float       $amount
      * @param string|null $currency
-     * @param string $type
+     * @param string      $type
      * @param string|null $firstName
      * @param string|null $lastName
      * @param string|null $phoneNumber
@@ -128,16 +128,16 @@ class Gateway extends AbstractGateway
         $xmlPayload = $this
             ->arrayToXml(
                 [
-                    'Email' => $email,
-                    'Reference' => $reference,
+                    'Email'       => $email,
+                    'Reference'   => $reference,
                     'Description' => $description,
-                    'Amount' => $amount,
-                    'Currency' => $currency,
-                    'Type' => $type,
-                    'FirstName' => $firstName,
-                    'LastName' => $lastName,
+                    'Amount'      => $amount,
+                    'Currency'    => $currency,
+                    'Type'        => $type,
+                    'FirstName'   => $firstName,
+                    'LastName'    => $lastName,
                     'PhoneNumber' => $phoneNumber,
-                    'xmlns' => $this::XMLNS,
+                    'xmlns'       => $this::XMLNS,
                 ],
                 new SimpleXMLElement('<PesapalDirectOrderInfo/>')
             )->asXML();
@@ -169,7 +169,7 @@ class Gateway extends AbstractGateway
         //post transaction to pesapal
         $iframeRequest = OAuthRequest::getRequest(
             $consumer,
-            $this->getApiDomain() . '/API/PostPesapalDirectOrderV4'
+            $this->getApiDomain().'/API/PostPesapalDirectOrderV4'
         );
         $iframeRequest->set_parameter('oauth_callback', $this->getCallbackUrl());
         $iframeRequest->set_parameter('pesapal_request_data', $xmlPayload);
@@ -181,15 +181,15 @@ class Gateway extends AbstractGateway
     /**
      * Process the pin message frmo pesapal,
      * this will query the pesapal api and
-     * return a transaction status
+     * return a transaction status.
      *
      * @param string $type
      * @param string $id
      * @param string $reference
      *
-     * @return string
-     *
      * @throws OAuthException
+     *
+     * @return string
      */
     public function getTransactionStatus(
         string $type,
@@ -198,16 +198,16 @@ class Gateway extends AbstractGateway
     ): string {
         $response = null;
         if (
-            $type == "CHANGE"
+            $type == 'CHANGE'
             && !empty($id)
         ) {
             // get transaction status
             $statusRequest = OAuthRequest::getRequest(
                 $this->getConsumer(),
-                $this->getApiDomain() . '/api/querypaymentstatus'
+                $this->getApiDomain().'/api/querypaymentstatus'
                 );
-            $statusRequest->set_parameter("pesapal_merchant_reference", $reference);
-            $statusRequest->set_parameter("pesapal_transaction_tracking_id", $id);
+            $statusRequest->set_parameter('pesapal_merchant_reference', $reference);
+            $statusRequest->set_parameter('pesapal_transaction_tracking_id', $id);
             $statusRequest->sign_request(new OAuthSignatureMethod_Hmac_Sha1(), $this->getConsumer());
 
             $client = new Client();
@@ -228,7 +228,7 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @param array $array
+     * @param array            $array
      * @param SimpleXMLElement $xml
      *
      * @return SimpleXMLElement
@@ -264,6 +264,7 @@ class Gateway extends AbstractGateway
         if (empty($response)) {
             return 'INVALID';
         }
+
         return 'COMPLETED';
     }
 }

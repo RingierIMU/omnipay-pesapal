@@ -7,8 +7,8 @@ class OAuthUtil
     public static function urlencode_rfc3986($input)
     {
         if (is_array($input)) {
-            return array_map([OAuthUtil::class, 'urlencode_rfc3986'], $input);
-        } else if (is_scalar($input)) {
+            return array_map([self::class, 'urlencode_rfc3986'], $input);
+        } elseif (is_scalar($input)) {
             return str_replace(
                 '+',
                 ' ',
@@ -39,8 +39,8 @@ class OAuthUtil
             $match = $matches[0];
             $header_name = $matches[2][0];
             $header_content = (isset($matches[5])) ? $matches[5][0] : $matches[4][0];
-            if (preg_match('/^oauth_/', $header_name) || ! $only_allow_oauth_parameters) {
-                $params[$header_name] = OAuthUtil::urldecode_rfc3986($header_content);
+            if (preg_match('/^oauth_/', $header_name) || !$only_allow_oauth_parameters) {
+                $params[$header_name] = self::urldecode_rfc3986($header_content);
             }
             $offset = $match[1] + strlen($match[0]);
         }
@@ -64,14 +64,14 @@ class OAuthUtil
         // that $_SERVER actually contains what we need
         $out = [];
         foreach ($_SERVER as $key => $value) {
-            if (substr($key, 0, 5) == "HTTP_") {
+            if (substr($key, 0, 5) == 'HTTP_') {
                 // this is chaos, basically it is just there to capitalize the first
                 // letter of every word that is not an initial HTTP and strip HTTP
                 // code from przemek
                 $key = str_replace(
-                    " ",
-                    "-",
-                    ucwords(strtolower(str_replace("_", " ", substr($key, 5))))
+                    ' ',
+                    '-',
+                    ucwords(strtolower(str_replace('_', ' ', substr($key, 5))))
                 );
                 $out[$key] = $value;
             }
@@ -85,7 +85,7 @@ class OAuthUtil
     // array('a' => array('b','c'), 'd' => 'e')
     public static function parse_parameters($input)
     {
-        if ( ! isset($input) || ! $input) {
+        if (!isset($input) || !$input) {
             return [];
         }
 
@@ -94,8 +94,8 @@ class OAuthUtil
         $parsed_parameters = [];
         foreach ($pairs as $pair) {
             $split = split('=', $pair, 2);
-            $parameter = OAuthUtil::urldecode_rfc3986($split[0]);
-            $value = isset($split[1]) ? OAuthUtil::urldecode_rfc3986($split[1]) : '';
+            $parameter = self::urldecode_rfc3986($split[0]);
+            $value = isset($split[1]) ? self::urldecode_rfc3986($split[1]) : '';
 
             if (isset($parsed_parameters[$parameter])) {
                 // We have already recieved parameter(s) with this name, so add to the list
@@ -118,13 +118,13 @@ class OAuthUtil
 
     public static function build_http_query($params)
     {
-        if ( ! $params) {
+        if (!$params) {
             return '';
         }
 
         // Urlencode both keys and values
-        $keys = OAuthUtil::urlencode_rfc3986(array_keys($params));
-        $values = OAuthUtil::urlencode_rfc3986(array_values($params));
+        $keys = self::urlencode_rfc3986(array_keys($params));
+        $values = self::urlencode_rfc3986(array_values($params));
         $params = array_combine($keys, $values);
 
         // Parameters are sorted by name, using lexicographical byte value ordering.
@@ -138,10 +138,10 @@ class OAuthUtil
                 // Ref: Spec: 9.1.1 (1)
                 natsort($value);
                 foreach ($value as $duplicate_value) {
-                    $pairs[] = $parameter . '=' . $duplicate_value;
+                    $pairs[] = $parameter.'='.$duplicate_value;
                 }
             } else {
-                $pairs[] = $parameter . '=' . $value;
+                $pairs[] = $parameter.'='.$value;
             }
         }
         // For each parameter, the name is separated from the corresponding value by an '=' character (ASCII code 61)

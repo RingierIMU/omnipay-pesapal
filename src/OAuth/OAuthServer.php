@@ -10,7 +10,7 @@ class OAuthServer
 
     protected $data_store;
 
-    function __construct($data_store)
+    public function __construct($data_store)
     {
         $this->data_store = $data_store;
     }
@@ -25,7 +25,7 @@ class OAuthServer
 
     /**
      * process a request_token request
-     * returns the request token on success
+     * returns the request token on success.
      */
     public function fetch_request_token(&$request)
     {
@@ -45,7 +45,7 @@ class OAuthServer
 
     /**
      * process an access_token request
-     * returns the access token on success
+     * returns the access token on success.
      */
     public function fetch_access_token(&$request)
     {
@@ -54,8 +54,7 @@ class OAuthServer
         $consumer = $this->get_consumer($request);
 
         // requires authorized request token
-        $token = $this->get_token($request, $consumer, "request");
-
+        $token = $this->get_token($request, $consumer, 'request');
 
         $this->check_signature($request, $consumer, $token);
 
@@ -65,26 +64,27 @@ class OAuthServer
     }
 
     /**
-     * verify an api call, checks all the parameters
+     * verify an api call, checks all the parameters.
      */
     public function verify_request(&$request)
     {
         $this->get_version($request);
         $consumer = $this->get_consumer($request);
-        $token = $this->get_token($request, $consumer, "access");
+        $token = $this->get_token($request, $consumer, 'access');
         $this->check_signature($request, $consumer, $token);
 
         return [$consumer, $token];
     }
 
     // Internals from here
+
     /**
-     * version 1
+     * version 1.
      */
     private function get_version(&$request)
     {
-        $version = $request->get_parameter("oauth_version");
-        if ( ! $version) {
+        $version = $request->get_parameter('oauth_version');
+        if (!$version) {
             $version = 1.0;
         }
         if ($version && $version != $this->version) {
@@ -95,23 +95,23 @@ class OAuthServer
     }
 
     /**
-     * figure out the signature with some defaults
+     * figure out the signature with some defaults.
      */
     private function get_signature_method(&$request)
     {
         $signature_method =
-            @$request->get_parameter("oauth_signature_method");
-        if ( ! $signature_method) {
-            $signature_method = "PLAINTEXT";
+            @$request->get_parameter('oauth_signature_method');
+        if (!$signature_method) {
+            $signature_method = 'PLAINTEXT';
         }
-        if ( ! in_array(
+        if (!in_array(
             $signature_method,
             array_keys($this->signature_methods))
         ) {
             throw new OAuthException(
-                "Signature method '$signature_method' not supported " .
-                "try one of the following: " .
-                implode(", ", array_keys($this->signature_methods))
+                "Signature method '$signature_method' not supported ".
+                'try one of the following: '.
+                implode(', ', array_keys($this->signature_methods))
             );
         }
 
@@ -119,33 +119,33 @@ class OAuthServer
     }
 
     /**
-     * try to find the consumer for the provided request's consumer key
+     * try to find the consumer for the provided request's consumer key.
      */
     private function get_consumer(&$request)
     {
-        $consumer_key = @$request->get_parameter("oauth_consumer_key");
-        if ( ! $consumer_key) {
-            throw new OAuthException("Invalid consumer key");
+        $consumer_key = @$request->get_parameter('oauth_consumer_key');
+        if (!$consumer_key) {
+            throw new OAuthException('Invalid consumer key');
         }
 
         $consumer = $this->data_store->lookup_consumer($consumer_key);
-        if ( ! $consumer) {
-            throw new OAuthException("Invalid consumer");
+        if (!$consumer) {
+            throw new OAuthException('Invalid consumer');
         }
 
         return $consumer;
     }
 
     /**
-     * try to find the token for the provided request's token key
+     * try to find the token for the provided request's token key.
      */
-    private function get_token(&$request, $consumer, $token_type = "access")
+    private function get_token(&$request, $consumer, $token_type = 'access')
     {
         $token_field = @$request->get_parameter('oauth_token');
         $token = $this->data_store->lookup_token(
             $consumer, $token_type, $token_field
         );
-        if ( ! $token) {
+        if (!$token) {
             throw new OAuthException("Invalid $token_type token: $token_field");
         }
 
@@ -154,7 +154,7 @@ class OAuthServer
 
     /**
      * all-in-one function to check the signature on a request
-     * should guess the signature method appropriately
+     * should guess the signature method appropriately.
      */
     private function check_signature(&$request, $consumer, $token)
     {
@@ -175,13 +175,13 @@ class OAuthServer
             $signature
         );
 
-        if ( ! $valid_sig) {
-            throw new OAuthException("Invalid signature");
+        if (!$valid_sig) {
+            throw new OAuthException('Invalid signature');
         }
     }
 
     /**
-     * check that the timestamp is new enough
+     * check that the timestamp is new enough.
      */
     private function check_timestamp($timestamp)
     {
@@ -195,7 +195,7 @@ class OAuthServer
     }
 
     /**
-     * check that the nonce is not repeated
+     * check that the nonce is not repeated.
      */
     private function check_nonce($consumer, $token, $nonce, $timestamp)
     {
@@ -210,5 +210,4 @@ class OAuthServer
             throw new OAuthException("Nonce already used: $nonce");
         }
     }
-
 }
