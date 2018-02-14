@@ -7,9 +7,9 @@ class OAuthSignatureMethod_Hmac_Sha1
     /**
      * @return string
      */
-    function get_name(): string
+    public function get_name(): string
     {
-        return "HMAC-SHA1";
+        return 'HMAC-SHA1';
     }
 
     /**
@@ -29,7 +29,7 @@ class OAuthSignatureMethod_Hmac_Sha1
 
         $key_parts = [
             $consumer->secret,
-            ($token) ? $token->secret : "",
+            ($token) ? $token->secret : '',
         ];
 
         $key_parts = OAuthUtil::urlencode_rfc3986($key_parts);
