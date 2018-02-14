@@ -129,16 +129,16 @@ class Gateway extends AbstractGateway
             <PesapalDirectOrderInfo
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            Currency="' . $currency . '"
-            Amount="' . $amount . '"
-            Description="' . $description . '"
-            Type="' . $type . '"
-            Reference="' . $reference . '"
-            FirstName="' . $firstName . '"
-            LastName="' . $lastName . '"
-            Email="' . $email . '"
-            PhoneNumber="' . $phoneNumber . '"
-            xmlns="' . $this::XMLNS . '" />';
+            Currency="'.$currency.'"
+            Amount="'.$amount.'"
+            Description="'.$description.'"
+            Type="'.$type.'"
+            Reference="'.$reference.'"
+            FirstName="'.$firstName.'"
+            LastName="'.$lastName.'"
+            Email="'.$email.'"
+            PhoneNumber="'.$phoneNumber.'"
+            xmlns="'.$this::XMLNS.'" />';
 
         return (string) $this->getIframeRequest(htmlentities($xml));
     }
@@ -226,7 +226,8 @@ class Gateway extends AbstractGateway
     }
 
     /**
-<<<<<<< Updated upstream
+     * <<<<<<< Updated upstream.
+     *
      * @param array            $array
      * @param SimpleXMLElement $xml
      *
@@ -244,8 +245,9 @@ class Gateway extends AbstractGateway
     }
 
     /**
-=======
->>>>>>> Stashed changes
+     * =======
+     * >>>>>>> Stashed changes.
+     *
      * @return string
      */
     protected function getApiDomain(): string
