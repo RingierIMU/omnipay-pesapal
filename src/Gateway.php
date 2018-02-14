@@ -166,7 +166,7 @@ class Gateway extends AbstractGateway
         //post transaction to pesapal
         $iframeRequest = OAuthRequest::getRequest(
             $consumer,
-            $this->getApiDomain().'/API/PostPesapalDirectOrderV4'
+            $this->getApiDomain() . '/API/PostPesapalDirectOrderV4'
         );
         $iframeRequest->set_parameter('oauth_callback', $this->getCallbackUrl());
         $iframeRequest->set_parameter('pesapal_request_data', $xmlPayload);
@@ -201,7 +201,7 @@ class Gateway extends AbstractGateway
             // get transaction status
             $statusRequest = OAuthRequest::getRequest(
                 $this->getConsumer(),
-                $this->getApiDomain().'/api/querypaymentstatus'
+                $this->getApiDomain() . '/api/querypaymentstatus'
                 );
             $statusRequest->set_parameter('pesapal_merchant_reference', $reference);
             $statusRequest->set_parameter('pesapal_transaction_tracking_id', $id);

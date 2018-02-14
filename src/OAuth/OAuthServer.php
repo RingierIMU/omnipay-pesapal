@@ -109,8 +109,8 @@ class OAuthServer
             array_keys($this->signature_methods))
         ) {
             throw new OAuthException(
-                "Signature method '$signature_method' not supported ".
-                'try one of the following: '.
+                "Signature method '$signature_method' not supported " .
+                'try one of the following: ' .
                 implode(', ', array_keys($this->signature_methods))
             );
         }
@@ -138,6 +138,9 @@ class OAuthServer
 
     /**
      * try to find the token for the provided request's token key.
+     *
+     * @param mixed $consumer
+     * @param mixed $token_type
      */
     private function get_token(&$request, $consumer, $token_type = 'access')
     {
@@ -155,6 +158,9 @@ class OAuthServer
     /**
      * all-in-one function to check the signature on a request
      * should guess the signature method appropriately.
+     *
+     * @param mixed $consumer
+     * @param mixed $token
      */
     private function check_signature(&$request, $consumer, $token)
     {
@@ -182,6 +188,8 @@ class OAuthServer
 
     /**
      * check that the timestamp is new enough.
+     *
+     * @param mixed $timestamp
      */
     private function check_timestamp($timestamp)
     {
@@ -196,6 +204,11 @@ class OAuthServer
 
     /**
      * check that the nonce is not repeated.
+     *
+     * @param mixed $consumer
+     * @param mixed $token
+     * @param mixed $nonce
+     * @param mixed $timestamp
      */
     private function check_nonce($consumer, $token, $nonce, $timestamp)
     {
