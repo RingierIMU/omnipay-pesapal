@@ -19,7 +19,7 @@ $ composer require oneafricamedia/omnipay-pesapal
 
 ## Basic Usage
 
-1) to render the pesapal iframe
+###to render the pesapal iframe
 
 ``` php
 use Omnipay\Omnipay;
@@ -30,14 +30,38 @@ $iframeSrc = Omnipay::create('Pesapal')
         'your_key', 
         'your_secret'
     )
-    ->getIframe(
+    ->setCallbackUrl('https://example.com/callback')
+    ->getIframeSrc(
         'test@example.com',
         'my_reference',
-         'description',
-         '1',
+        'description',
+        100
     );
     
     
-    echo "<iframe scr=" . $iframeSrc . " />" ;
+     echo "<iframe src='$iframeSrc' />";
 ```
+
+### to check transaction history (from the pesapal ipn)
+
+1) configure & setup an endpoint to receive the ipn message from pesapal
+2) listen for the message and use `getTransactionStatus` (please handle the http GET vars accordingly)
+
+``` php
+use Omnipay\Omnipay;
+
+
+$status = Omnipay::create('Pesapal')
+    ->setCredentials(
+        'your_key', 
+        'your_secret'
+    )
+    ->getTransactionStatus(
+        $_GET['pesapal_notification_type'],
+        $_GET['pesapal_transaction_tracking_id'],
+        $_GET['pesapal_transaction_tracking_id']
+    );
+    
+```
+3) `$status` will be either `PENDING`, `COMPLETED`, `FAILED` or `INVALID`. Handle these statuses in your application workflow accordingly.
 

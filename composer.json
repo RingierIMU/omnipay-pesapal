@@ -1,7 +1,7 @@
 {
   "name": "oneafricamedia/omnipay-pesapal",
   "type": "library",
-  "description": "PesaPal gateway for Omnipay payment processing library",
+  "description": "Pesapal gateway for Omnipay payment processing library",
   "keywords": [
     "gateway",
     "merchant",
