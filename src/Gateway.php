@@ -125,24 +125,22 @@ class Gateway extends AbstractGateway
         string $lastName = null,
         string $phoneNumber = null
     ): string {
-        $xmlPayload = $this
-            ->arrayToXml(
-                [
-                    'Email'       => $email,
-                    'Reference'   => $reference,
-                    'Description' => $description,
-                    'Amount'      => $amount,
-                    'Currency'    => $currency,
-                    'Type'        => $type,
-                    'FirstName'   => $firstName,
-                    'LastName'    => $lastName,
-                    'PhoneNumber' => $phoneNumber,
-                    'xmlns'       => $this::XMLNS,
-                ],
-                new SimpleXMLElement('<PesapalDirectOrderInfo/>')
-            )->asXML();
+        $xml = '<?xml version="1.0" encoding="utf-8"?>
+            <PesapalDirectOrderInfo
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            Currency="' . $currency . '"
+            Amount="' . $amount . '"
+            Description="' . $description . '"
+            Type="' . $type . '"
+            Reference="' . $reference . '"
+            FirstName="' . $firstName . '"
+            LastName="' . $lastName . '"
+            Email="' . $email . '"
+            PhoneNumber="' . $phoneNumber . '"
+            xmlns="' . $this::XMLNS . '" />';
 
-        return (string) $this->getIframeRequest($xmlPayload);
+        return (string) $this->getIframeRequest(htmlentities($xml));
     }
 
     /**
@@ -228,6 +226,7 @@ class Gateway extends AbstractGateway
     }
 
     /**
+<<<<<<< Updated upstream
      * @param array            $array
      * @param SimpleXMLElement $xml
      *
@@ -245,6 +244,8 @@ class Gateway extends AbstractGateway
     }
 
     /**
+=======
+>>>>>>> Stashed changes
      * @return string
      */
     protected function getApiDomain(): string
