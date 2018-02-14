@@ -2,9 +2,8 @@
 
 **Pesapal driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/thephpleague/omnipay-paypal.png?branch=master)](https://travis-ci.org/thephpleague/omnipay-paypal)
-[![Latest Stable Version](https://poser.pugx.org/omnipay/paypal/version.png)](https://packagist.org/packages/omnipay/paypal)
-[![Total Downloads](https://poser.pugx.org/omnipay/paypal/d/total.png)](https://packagist.org/packages/omnipay/paypal)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0b7329e3c725e30c4344/maintainability)](https://codeclimate.com/github/lucidlogic/omnipay-pesapal/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0b7329e3c725e30c4344/test_coverage)](https://codeclimate.com/github/lucidlogic/omnipay-pesapal/test_coverage)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements PayPal support for Omnipay.
@@ -19,7 +18,7 @@ $ composer require oneafricamedia/omnipay-pesapal
 
 ## Basic Usage
 
-###to render the pesapal iframe
+### to render the pesapal iframe
 
 ``` php
 use Omnipay\Omnipay;

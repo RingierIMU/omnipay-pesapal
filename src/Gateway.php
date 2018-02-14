@@ -261,6 +261,9 @@ class Gateway extends AbstractGateway
      */
     protected function transformResponse($response): string
     {
+        if (empty($response)) {
+            return 'INVALID';
+        }
         return 'COMPLETED';
     }
 }
