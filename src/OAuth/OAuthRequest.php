@@ -22,16 +22,20 @@ class OAuthRequest
 
     /**
      * attempt to build up a request from what was passed to the server.
+     *
+     * @param null|mixed $http_method
+     * @param null|mixed $http_url
+     * @param null|mixed $parameters
      */
     public static function from_request($http_method = null, $http_url = null, $parameters = null)
     {
         $scheme = (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on')
             ? 'http'
             : 'https';
-        @$http_url or $http_url = $scheme.
-                                  '://'.$_SERVER['HTTP_HOST'].
-                                  ':'.
-                                  $_SERVER['SERVER_PORT'].
+        @$http_url or $http_url = $scheme .
+                                  '://' . $_SERVER['HTTP_HOST'] .
+                                  ':' .
+                                  $_SERVER['SERVER_PORT'] .
                                   $_SERVER['REQUEST_URI'];
         @$http_method or $http_method = $_SERVER['REQUEST_METHOD'];
 
@@ -81,9 +85,9 @@ class OAuthRequest
     public static function getRequest($consumer, $http_url): self
     {
         $defaults = [
-            'oauth_version'      => self::$version,
-            'oauth_nonce'        => self::generate_nonce(),
-            'oauth_timestamp'    => self::generate_timestamp(),
+            'oauth_version' => self::$version,
+            'oauth_nonce' => self::generate_nonce(),
+            'oauth_timestamp' => self::generate_timestamp(),
             'oauth_consumer_key' => $consumer->key,
         ];
 
@@ -200,7 +204,7 @@ class OAuthRequest
         $post_data = $this->to_postdata();
         $out = $this->get_normalized_http_url();
         if ($post_data) {
-            $out .= '?'.$post_data;
+            $out .= '?' . $post_data;
         }
 
         return $out;
@@ -228,10 +232,10 @@ class OAuthRequest
             if (is_array($v)) {
                 throw new Exception('Arrays not supported in headers');
             }
-            $out .= ','.
-                    OAuthUtil::urlencode_rfc3986($k).
-                    '="'.
-                    OAuthUtil::urlencode_rfc3986($v).
+            $out .= ',' .
+                    OAuthUtil::urlencode_rfc3986($k) .
+                    '="' .
+                    OAuthUtil::urlencode_rfc3986($v) .
                     '"';
         }
 
@@ -278,12 +282,12 @@ class OAuthRequest
         $charid = strtoupper(md5(uniqid(rand(), true)));
         $hyphen = chr(45); // "-"
         $uuid = chr(123)// "{"
-                .substr($charid, 0, 8).$hyphen
-                .substr($charid, 8, 4).$hyphen
-                .substr($charid, 12, 4).$hyphen
-                .substr($charid, 16, 4).$hyphen
-                .substr($charid, 20, 12)
-                .chr(125); // "}"
+                . substr($charid, 0, 8) . $hyphen
+                . substr($charid, 8, 4) . $hyphen
+                . substr($charid, 12, 4) . $hyphen
+                . substr($charid, 16, 4) . $hyphen
+                . substr($charid, 20, 12)
+                . chr(125); // "}"
         return $uuid;
     }
 }

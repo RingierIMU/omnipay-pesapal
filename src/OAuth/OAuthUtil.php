@@ -138,10 +138,10 @@ class OAuthUtil
                 // Ref: Spec: 9.1.1 (1)
                 natsort($value);
                 foreach ($value as $duplicate_value) {
-                    $pairs[] = $parameter.'='.$duplicate_value;
+                    $pairs[] = $parameter . '=' . $duplicate_value;
                 }
             } else {
-                $pairs[] = $parameter.'='.$value;
+                $pairs[] = $parameter . '=' . $value;
             }
         }
         // For each parameter, the name is separated from the corresponding value by an '=' character (ASCII code 61)
