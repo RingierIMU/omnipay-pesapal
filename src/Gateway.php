@@ -9,7 +9,6 @@ use Omnipay\Pesapal\OAuth\OAuthConsumer;
 use Omnipay\Pesapal\OAuth\OAuthException;
 use Omnipay\Pesapal\OAuth\OAuthRequest;
 use Omnipay\Pesapal\OAuth\OAuthSignatureMethod_Hmac_Sha1;
-use SimpleXMLElement;
 
 /**
  * @method authorize(array $options = array())
@@ -226,26 +225,6 @@ class Gateway extends AbstractGateway
     }
 
     /**
-<<<<<<< Updated upstream
-     * @param array            $array
-     * @param SimpleXMLElement $xml
-     *
-     * @return SimpleXMLElement
-     */
-    private function arrayToXml(array $array, SimpleXMLElement $xml)
-    {
-        foreach ($array as $key => $value) {
-            is_array($value)
-                ? $this->arrayToXml($value, $xml->addChild($key))
-                : $xml->addChild($key, $value);
-        }
-
-        return $xml;
-    }
-
-    /**
-=======
->>>>>>> Stashed changes
      * @return string
      */
     protected function getApiDomain(): string
