@@ -6,8 +6,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0b7329e3c725e30c4344/test_coverage)](https://codeclimate.com/github/lucidlogic/omnipay-pesapal/test_coverage)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.3+. This package implements PayPal support for Omnipay.
-This package is a driver for pesapal https://www.pesapal.com/
+processing library for PHP. This package implements Pesapal support for Omnipay. https://www.pesapal.com/
+refer to the API docs here: http://http://developer.pesapal.com/
 ## Install
 
 Via Composer
@@ -18,7 +18,7 @@ $ composer require oneafricamedia/omnipay-pesapal
 
 ## Basic Usage
 
-### to render the pesapal iframe
+### Render the pesapal iframe
 
 ``` php
 use Omnipay\Omnipay;
@@ -41,7 +41,7 @@ $iframeSrc = Omnipay::create('Pesapal')
      echo "<iframe src='$iframeSrc' />";
 ```
 
-### to check transaction history (from the pesapal ipn)
+### Check transaction status (from the pesapal ipn)
 
 1) configure & setup an endpoint to receive the ipn message from pesapal
 2) listen for the message and use `getTransactionStatus` (please handle the http GET vars accordingly)
