@@ -5,6 +5,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/0b7329e3c725e30c4344/maintainability)](https://codeclimate.com/github/lucidlogic/omnipay-pesapal/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0b7329e3c725e30c4344/test_coverage)](https://codeclimate.com/github/lucidlogic/omnipay-pesapal/test_coverage)
 [![Style CI](https://styleci.io/repos/121246094/shield)](https://styleci.io/repos/121246094/shield)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lucidlogic/omnipay-pesapal/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/lucidlogic/omnipay-pesapal/?branch=master)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP. This package implements Pesapal support for Omnipay. https://www.pesapal.com/
@@ -19,13 +20,13 @@ $ composer require oneafricamedia/omnipay-pesapal
 
 ## Basic Usage
 
-### Render the pesapal iframe
+### Get the pesapal iframe/redirect URL
 
 ``` php
 use Omnipay\Omnipay;
 
 
-$iframeSrc = Omnipay::create('Pesapal')
+$url = Omnipay::create('Pesapal')
     ->setCredentials(
         'your_key', 
         'your_secret'

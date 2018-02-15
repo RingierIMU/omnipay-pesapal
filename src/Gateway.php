@@ -248,7 +248,9 @@ class Gateway extends AbstractGateway
         return str_replace(
             'pesapal_response_data=',
             '',
-            $response->getBody()->getContents()
+            $response
+                ->getBody()
+                ->getContents()
         );
     }
 }
