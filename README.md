@@ -59,7 +59,7 @@ $status = Omnipay::create('Pesapal')
     ->getTransactionStatus(
         $_GET['pesapal_notification_type'],
         $_GET['pesapal_transaction_tracking_id'],
-        $_GET['pesapal_transaction_tracking_id']
+        $_GET['pesapal_merchant_reference']
     );
     
 ```

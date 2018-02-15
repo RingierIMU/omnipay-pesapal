@@ -93,9 +93,9 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCallbackUrl(): string
+    public function getCallbackUrl()
     {
         return $this->getParameter('callbackUrl');
     }
@@ -245,6 +245,10 @@ class Gateway extends AbstractGateway
             return 'INVALID';
         }
 
-        return 'COMPLETED';
+        return str_replace(
+            'pesapal_response_data=',
+            '',
+            $response->getBody()->getContents()
+        );
     }
 }
