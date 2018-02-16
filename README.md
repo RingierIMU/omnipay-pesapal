@@ -32,15 +32,12 @@ $url = Omnipay::create('Pesapal')
         'your_secret'
     )
     ->setCallbackUrl('https://example.com/callback')
-    ->getIframeSrc(
+    ->getUrl(
         'test@example.com',
         'my_reference',
         'description',
         100
     );
-    
-    
-     echo "<iframe src='$iframeSrc' />";
 ```
 
 ### Check transaction status (from the pesapal ipn)

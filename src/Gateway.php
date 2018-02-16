@@ -113,7 +113,7 @@ class Gateway extends AbstractGateway
      *
      * @return string
      */
-    public function getIframeSrc(
+    public function getUrl(
         string $email,
         string $reference,
         string $description,
@@ -139,7 +139,7 @@ class Gateway extends AbstractGateway
             PhoneNumber="' . $phoneNumber . '"
             xmlns="' . $this::XMLNS . '" />';
 
-        return (string) $this->getIframeRequest(htmlentities($xml));
+        return (string) $this->getUrlRequest(htmlentities($xml));
     }
 
     /**
@@ -159,11 +159,11 @@ class Gateway extends AbstractGateway
      *
      * @return OAuthRequest
      */
-    protected function getIframeRequest(
+    protected function getUrlRequest(
         string $xmlPayload
     ): OAuthRequest {
         $consumer = $this->getConsumer();
-        //post transaction to pesapal
+        // post transaction to pesapal
         $iframeRequest = OAuthRequest::getRequest(
             $consumer,
             $this->getApiDomain() . '/API/PostPesapalDirectOrderV4'
