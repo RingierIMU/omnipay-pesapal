@@ -9,7 +9,7 @@
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP. This package implements Pesapal support for Omnipay. https://www.pesapal.com/
-refer to the API docs here: http://http://developer.pesapal.com/
+refer to the API docs here: http://developer.pesapal.com/
 ## Install
 
 Via Composer
@@ -62,4 +62,10 @@ $status = Omnipay::create('Pesapal')
     
 ```
 3) `$status` will be either `PENDING`, `COMPLETED`, `FAILED` or `INVALID`. Handle these statuses in your application workflow accordingly.
+
+### TODO
+
+1) Test coverage
+2) add `QueryPaymentStatusByMerchantRef` support
+3) add `QueryPaymentDetails` support
 
