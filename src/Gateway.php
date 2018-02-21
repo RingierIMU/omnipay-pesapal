@@ -25,7 +25,7 @@ use Omnipay\Pesapal\OAuth\OAuthSignatureMethod_Hmac_Sha1;
 class Gateway extends AbstractGateway
 {
     const XMLNS = 'http://www.pesapal.com';
-    const PROD_DOMAIN = 'www.pesapal.com';
+    const PROD_DOMAIN = 'https://www.pesapal.com';
     const DEBUG_DOMAIN = 'https://demo.pesapal.com';
 
     /**
