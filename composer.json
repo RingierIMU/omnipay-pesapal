@@ -1,7 +1,7 @@
 {
   "name": "oneafricamedia/omnipay-pesapal",
   "type": "library",
-  "description": "PesaPal gateway for Omnipay payment processing library",
+  "description": "Pesapal gateway for Omnipay payment processing library",
   "keywords": [
     "gateway",
     "merchant",
@@ -25,15 +25,9 @@
     }
   },
   "require": {
-    "omnipay/common": "~2.0"
-  },
-  "require-dev": {
-    "omnipay/tests": "~2.0"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.3.x-dev"
-    }
+    "php": "^7.0",
+    "omnipay/omnipay": "v3.0-alpha.1",
+    "php-http/guzzle6-adapter": "^1.1"
   },
   "minimum-stability": "dev"
 }
