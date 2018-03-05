@@ -181,7 +181,6 @@ class Gateway extends AbstractGateway
      * return a transaction status.
      *
      * @param string $type
-     * @param string $id
      * @param string $reference
      *
      * @throws OAuthException
@@ -190,13 +189,11 @@ class Gateway extends AbstractGateway
      */
     public function getTransactionStatus(
         string $type,
-        string $id,
         string $reference
     ): string {
         $response = null;
         if (
             $type == 'CHANGE'
-            && !empty($id)
         ) {
             // get transaction status
             $statusRequest = OAuthRequest::getRequest(
@@ -204,7 +201,6 @@ class Gateway extends AbstractGateway
                 $this->getApiDomain() . '/api/querypaymentstatus'
                 );
             $statusRequest->set_parameter('pesapal_merchant_reference', $reference);
-            $statusRequest->set_parameter('pesapal_transaction_tracking_id', $id);
             $statusRequest->sign_request(new OAuthSignatureMethod_Hmac_Sha1(), $this->getConsumer());
 
             $client = new Client();
