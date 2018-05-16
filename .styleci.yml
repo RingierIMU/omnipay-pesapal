@@ -80,7 +80,7 @@ enabled:
 #    - not_operator_with_space
 #    - not_operator_with_successor_space
     - object_operator_without_whitespace
-#    - ordered_class_elements 
+#    - ordered_class_elements
     - alpha_ordered_imports
 #    - phpdoc_align
     - phpdoc_add_missing_param_annotation
@@ -106,7 +106,7 @@ enabled:
     # - property_visibility_required #psr2
 #    - psr4 #psr2
     - return_type_declaration
-    - self_accessor
+#    - self_accessor
     - short_array_syntax
     - short_scalar_cast
 #    - simplified_null_return
