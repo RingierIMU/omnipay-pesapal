@@ -26,8 +26,6 @@
   },
   "require": {
     "php": "^7.0",
-    "omnipay/omnipay": "v3.0-alpha.1",
-    "php-http/guzzle6-adapter": "^1.1"
-  },
-  "minimum-stability": "dev"
+    "league/omnipay": "^3.0"
+  }
 }
