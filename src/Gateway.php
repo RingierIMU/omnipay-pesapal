@@ -124,7 +124,7 @@ class Gateway extends AbstractGateway
         string $lastName = null,
         string $phoneNumber = null
     ): string {
-        $emailNode = $email ? 'Email="' . $email .'"' : null;
+        $emailNode = $email ? 'Email="' . $email . '"' : null;
         $xml = '<?xml version="1.0" encoding="utf-8"?>
             <PesapalDirectOrderInfo
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
