@@ -135,8 +135,8 @@ class Gateway extends AbstractGateway
             Type="' . $type . '"
             Reference="' . $reference . '"
             FirstName="' . $firstName . '"
-            LastName="' . $lastName . '"' .
-            $emailNode . '
+            LastName="' . $lastName . '"
+            ' . $emailNode . '
             PhoneNumber="' . $phoneNumber . '"
             xmlns="' . $this::XMLNS . '" />';
 
