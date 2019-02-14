@@ -101,7 +101,7 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @param string      $email
+     * @param string      $phoneNumber
      * @param string      $reference
      * @param string      $description
      * @param float       $amount
@@ -109,12 +109,12 @@ class Gateway extends AbstractGateway
      * @param string      $type
      * @param string|null $firstName
      * @param string|null $lastName
-     * @param string|null $phoneNumber
+     * @param string|null $email
      *
      * @return string
      */
     public function getUrl(
-        string $email,
+        string $phoneNumber,
         string $reference,
         string $description,
         float $amount,
@@ -122,7 +122,7 @@ class Gateway extends AbstractGateway
         string $type = 'MERCHANT',
         string $firstName = null,
         string $lastName = null,
-        string $phoneNumber = null
+        string $email = null
     ): string {
         $emailNode = $email ? 'Email="' . $email . '"' : null;
         $xml = '<?xml version="1.0" encoding="utf-8"?>
@@ -135,8 +135,8 @@ class Gateway extends AbstractGateway
             Type="' . $type . '"
             Reference="' . $reference . '"
             FirstName="' . $firstName . '"
-            LastName="' . $lastName . '"' .
-            $emailNode . '
+            LastName="' . $lastName . '"
+            ' . $emailNode . '
             PhoneNumber="' . $phoneNumber . '"
             xmlns="' . $this::XMLNS . '" />';
 
