@@ -101,7 +101,7 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @param string      $phoneNumber
+     * @param string|null $email
      * @param string      $reference
      * @param string      $description
      * @param float       $amount
@@ -109,12 +109,12 @@ class Gateway extends AbstractGateway
      * @param string      $type
      * @param string|null $firstName
      * @param string|null $lastName
-     * @param string|null $email
+     * @param string|null $phoneNumber
      *
      * @return string
      */
     public function getUrl(
-        string $phoneNumber,
+        string $email = null,
         string $reference,
         string $description,
         float $amount,
@@ -122,9 +122,11 @@ class Gateway extends AbstractGateway
         string $type = 'MERCHANT',
         string $firstName = null,
         string $lastName = null,
-        string $email = null
+        string $phoneNumber = null
     ): string {
         $emailNode = $email ? 'Email="' . $email . '"' : null;
+        $phoneNumberNode = $phoneNumber ? 'PhoneNumber="' . $phoneNumber . '"' : null;
+        
         $xml = '<?xml version="1.0" encoding="utf-8"?>
             <PesapalDirectOrderInfo
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -137,7 +139,7 @@ class Gateway extends AbstractGateway
             FirstName="' . $firstName . '"
             LastName="' . $lastName . '"
             ' . $emailNode . '
-            PhoneNumber="' . $phoneNumber . '"
+            ' . $phoneNumberNode . '
             xmlns="' . $this::XMLNS . '" />';
 
         return (string) $this->getUrlRequest(htmlentities($xml));
