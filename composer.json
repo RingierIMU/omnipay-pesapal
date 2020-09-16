@@ -26,6 +26,6 @@
   },
   "require": {
     "php": "^7.0",
-    "league/omnipay-common": "^3.0"
+    "omnipay/common": "^3.0"
   }
 }
